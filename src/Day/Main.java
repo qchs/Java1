@@ -13,8 +13,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        int year = 2;
-        int month = 2;
+        int year = 2018;
+        int month = 1;
         Scanner sc = new Scanner(System.in);
 
 //        System.out.println("请输入年和月份：");
@@ -32,22 +32,38 @@ public class Main {
         // 这个月的第一天是星期几就从第几个打起，之前的为上个月的填充
 
       //  isR(year);
+        // 当年当月是多少天
         int days = getDays(year,month);
+        int sum = getSumDays(year,month);
+        int m=sum%7;
+        //先打m个空格
+        System.out.println("一"+"\t"+"二"+"\t"+"三"+"\t"+"四"+"\t"+"五"+"\t"+"六"+"\t"+"日"+"\t");
+        for (int i = 0; i < m; i++) {
+            System.out.print("\t");
+        }
         for (int x =1;x<=days;x++){
             System.out.print(x+"\t");
-            if (x%7==0){
+            if ((m+x)%7==0){
                 System.out.println();
             }
         }
-        int sum = getSumDays(year,month);
+
+//
+//        switch (m){
+//            case 1:                System.out.println("上月结尾为周1");break;
+//            case 2:                System.out.println("上月结尾为周2");break;
+//            case 3:                System.out.println("上月结尾为周3");break;
+//            case 4:                System.out.println("上月结尾为周4");break;
+//            case 5:                System.out.println("上月结尾为周5");break;
+//            case 6:                System.out.println("上月结尾为周6");break;
+//            case 0:                System.out.println("上月结尾为周7");break;
+//
+//        }
+
     }//mathod  printCanlender end
 
     public static boolean isR(int year) {
-        if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
-            System.out.println(year + "是闰年，2月有29天");
-            return true;
-        }
-        return false;
+        return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
     }//mathod isR end
 
     public static int getDays(int year,int month) {
@@ -94,7 +110,25 @@ public class Main {
         }
         //加上到当年、当月的天数
         switch (month){
-            case 1:
+            case 12:
+                sum+=31;
+            case 11:
+                sum+=30;
+            case 10:
+                sum+=31;
+            case 9:
+                sum+=30;
+            case 8:
+                sum+=31;
+            case 7:
+                sum+=31;
+            case 6:
+                sum+=30;
+            case 5:
+                sum+=31;
+            case 4:
+                sum+=30;
+            case 3:
                 sum+=31;
             case 2:
                 if (isR(year)){
@@ -102,31 +136,14 @@ public class Main {
                 }else {
                     sum+= 28;
                 }
-            case 3:
+            case 1:
                 sum+=31;
-            case 4:
-                sum+=30;
-            case 5:
-                sum+=31;
-            case 6:
-                sum+=30;
-            case 7:
-                sum+=31;
-            case 8:
-                sum+=31;
-            case 9:
-                sum+=30;
-            case 10:
-                sum+=31;
-            case 11:
-                sum+=30;
-            case 12:
-                sum+=31;
+
         }
 
         System.out.println("到"+year+"年"+month+"月"+"过了"+sum+"天");
 
-        return  0;
+        return  sum;
     }//mathod getSumDays end
 }//class main end here
 
